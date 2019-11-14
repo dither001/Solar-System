@@ -36,6 +36,7 @@ import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
 import javafx.scene.PointLight;
+import javafx.scene.control.Control;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -96,6 +97,10 @@ public class PlanetViewer extends Application {
     Label detailsText_5 = new Label();
     Label detailsText_6 = new Label();
     Label detailsText_7 = new Label();
+    
+    public VBox planetDetails = new VBox(7);
+    public Scene detailsScene = new Scene(planetDetails);
+    public Stage detailsStage = new Stage(StageStyle.TRANSPARENT);
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -126,8 +131,9 @@ public class PlanetViewer extends Application {
         scene.setCursor(Cursor.DEFAULT);
         scene.setFill(Color.rgb(10, 10, 10));
         scene.setCamera(camera);
-
+        
         initMouseControl(planets, scene, primaryStage);
+        initKeyControl(planets, scene, primaryStage);
 
         primaryStage.setTitle("PlanetViewer");
         primaryStage.setScene(scene);
@@ -160,13 +166,10 @@ public class PlanetViewer extends Application {
         final HBox hbox6 = new HBox(detailsLabel_6, detailsText_6);
         final HBox hbox7 = new HBox(detailsLabel_7, detailsText_7);
 
-        VBox planetDetails = new VBox(7);
         planetDetails.getChildren().addAll(hbox1, hbox2, hbox3, hbox4, hbox5, hbox6, hbox7);
         planetDetails.setBackground(Background.EMPTY);
         //planetDetails.setPadding(new Insets(20));
 
-        Scene detailsScene = new Scene(planetDetails);
-        Stage detailsStage = new Stage(StageStyle.TRANSPARENT);
         detailsStage.initOwner(primaryStage);
         detailsStage.initModality(Modality.NONE);
         detailsStage.setScene(detailsScene);
@@ -174,47 +177,6 @@ public class PlanetViewer extends Application {
         detailsStage.setY(screenY - 275);
         detailsScene.setFill(Color.TRANSPARENT);
         detailsScene.getStylesheets().add(PlanetViewer.class.getResource("stylesheet.css").toExternalForm());
-
-        earth.setOnMouseClicked((event) -> {
-            detailsStage.close();
-            detailsText_1.setText("Earth");
-            detailsText_2.setText("4.5 Billion Years"); //Age
-            detailsText_3.setText("Terrestrial"); //Type
-            detailsText_4.setText("12,742 km"); //Diameter
-            detailsText_5.setText("40,075 km"); //Circumference at Equator
-            detailsText_6.setText("5,972E24 kg"); //Mass
-            detailsText_7.setText("average 14°C"); //Temperature
-            detailsStage.show();
-        });
-
-        sun.setOnMouseClicked((event) -> {
-            detailsStage.close();
-            detailsText_1.setText("Sun");
-            detailsText_2.setText("4.6 Billion Years");
-            detailsText_3.setText("Yelow Dwarf");
-            detailsText_4.setText("1,392,684 km");
-            detailsText_5.setText("4,366,813 km");
-            detailsText_6.setText("1,989E30 kg");
-            detailsText_7.setText("5500°C");
-            detailsStage.show();
-        });
-
-        imageView.setOnMouseClicked((event) -> {
-            //detailsStage.hide();
-            detailsStage.close();
-        });
-
-        imageView.setOnMouseDragEntered((event) -> {
-            detailsStage.close();
-        });
-
-        scene.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.ESCAPE) {
-                Platform.exit();
-                System.exit(0);
-            }
-        });
-
     }
 
     private void prepareAnimation() {
@@ -398,7 +360,7 @@ public class PlanetViewer extends Application {
             angleY.set(anchorAngleY - (anchorX - event.getSceneX()));
 
         });
-
+        
         scene.setOnMouseReleased(event -> {
             scene.setCursor(Cursor.DEFAULT);
         });
@@ -408,6 +370,132 @@ public class PlanetViewer extends Application {
             if (group.getTranslateZ() + delta < 4000) {
                 group.translateZProperty().set(group.getTranslateZ() + delta);
             } else {
+            }
+        });
+        
+        sun.setOnMouseClicked((event) -> {
+            detailsStage.close();
+            detailsText_1.setText("Sun");
+            detailsText_2.setText("4.6 Billion Years");
+            detailsText_3.setText("Yelow Dwarf");
+            detailsText_4.setText("1,392,684 km");
+            detailsText_5.setText("4,366,813 km");
+            detailsText_6.setText("1,989E30 kg");
+            detailsText_7.setText("5500°C");
+            detailsStage.show();
+        });
+        
+        mercury.setOnMouseClicked((event) -> {
+            detailsStage.close();
+            detailsText_1.setText("Mercury");
+            detailsText_2.setText("4.5 Billion Years");
+            detailsText_3.setText("Terrestial");
+            detailsText_4.setText("4,879,4 km");
+            detailsText_5.setText("15,329 km");
+            detailsText_6.setText("3,285E23 kg");
+            detailsText_7.setText("167°C");
+            detailsStage.show();
+        });
+        
+        venus.setOnMouseClicked((event) -> {
+            detailsStage.close();
+            detailsText_1.setText("Venus");
+            detailsText_2.setText("4.5 Billion Years");
+            detailsText_3.setText("Terrestial");
+            detailsText_4.setText("12,104 km");
+            detailsText_5.setText("40,075 km");
+            detailsText_6.setText("4,867E24 kg");
+            detailsText_7.setText("462°C");
+            detailsStage.show();
+        });
+        
+        earth.setOnMouseClicked((event) -> {
+            detailsStage.close();
+            detailsText_1.setText("Earth");
+            detailsText_2.setText("4.5 Billion Years"); //Age
+            detailsText_3.setText("Terrestrial"); //Type
+            detailsText_4.setText("12,742 km"); //Diameter
+            detailsText_5.setText("40,075 km"); //Circumference at Equator
+            detailsText_6.setText("5,972E24 kg"); //Mass
+            detailsText_7.setText("average 14°C"); //Temperature
+            detailsStage.show();
+        });
+        
+        mars.setOnMouseClicked((event) -> {
+            detailsStage.close();
+            detailsText_1.setText("Mars");
+            detailsText_2.setText("4.6 Billion Years");
+            detailsText_3.setText("Terrestial");
+            detailsText_4.setText("6,779 km");
+            detailsText_5.setText("21,343 km");
+            detailsText_6.setText("6,39E23 kg");
+            detailsText_7.setText("-60°C");
+            detailsStage.show();
+        }); 
+        
+        jupiter.setOnMouseClicked((event) -> {
+            detailsStage.close();
+            detailsText_1.setText("Jupiter");
+            detailsText_2.setText("4.5 Billion Years");
+            detailsText_3.setText("Gas giant");
+            detailsText_4.setText("139,820 km");
+            detailsText_5.setText("439,264 km");
+            detailsText_6.setText("1,898E27 kg");
+            detailsText_7.setText("-145°C");
+            detailsStage.show();
+        }); 
+        
+        saturn.setOnMouseClicked((event) -> {
+            detailsStage.close();
+            detailsText_1.setText("Saturn");
+            detailsText_2.setText("4.5 Billion Years");
+            detailsText_3.setText("Gas giant");
+            detailsText_4.setText("116,460 km");
+            detailsText_5.setText("378,675 km");
+            detailsText_6.setText("5,683E26 kg");
+            detailsText_7.setText("-178°C");
+            detailsStage.show();
+        }); 
+        
+        uranus.setOnMouseClicked((event) -> {
+            detailsStage.close();
+            detailsText_1.setText("Uranus");
+            detailsText_2.setText("4.5 Billion Years");
+            detailsText_3.setText("Blue planet");
+            detailsText_4.setText("50,724 km");
+            detailsText_5.setText("160,590 km");
+            detailsText_6.setText("8,681E25 kg");
+            detailsText_7.setText("-197°C");
+            detailsStage.show();
+        }); 
+        
+        neptune.setOnMouseClicked((event) -> {
+            detailsStage.close();
+            detailsText_1.setText("Neptune");
+            detailsText_2.setText("4.5 Billion Years");
+            detailsText_3.setText("Gas giant");
+            detailsText_4.setText("49,244 km");
+            detailsText_5.setText("155,600 km");
+            detailsText_6.setText("1,024E26 kg");
+            detailsText_7.setText("-214°C");
+            detailsStage.show();
+        }); 
+        
+        imageView.setOnMouseClicked((event) -> {
+            //detailsStage.hide();
+            detailsStage.close();
+        });
+
+        imageView.setOnMouseDragEntered((event) -> {
+            detailsStage.close();
+        });
+    }
+    
+    private void initKeyControl(SmartGroup group, Scene scene, Stage stage) {
+        scene.setOnKeyPressed(key -> {
+            if (key.getCode() == KeyCode.ESCAPE) {
+                Platform.exit();
+                System.exit(0);
             }
         });
     }
