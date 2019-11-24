@@ -67,8 +67,7 @@ Currently unavaible. Please check the intructions [above](#how-to-use).
 ## Support
 
 <!-- Place this tag where you want the button to render. -->
-<a class="github-button" href="https://github.com/kamillobinski/Solar-System" aria-label="Star kamillobinski/Solar-System on GitHub">
-<img src="https://github.com/kamillobinski/Solar-System/blob/master/preview/leave-a-star.png?raw=true" alt="Star this project" height= "41px"></a>
+<img src="https://github.com/kamillobinski/Solar-System/blob/master/preview/leave-a-star.png?raw=true" alt="Star this project" height= "41px">
 
 ## You may also like...
 
