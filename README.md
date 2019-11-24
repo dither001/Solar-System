@@ -58,11 +58,11 @@ Note: If you already have [Java IDE](https://netbeans.apache.org/download/index.
 
 ## Download
 
-Currently unavaible. Please check the intructions [above](#how-to-use).
+Currently unavailable. Please check the intructions [above](#how-to-use).
 
 ## Credits
 
-- Textures are taked from [here](https://www.solarsystemscope.com/textures/)
+- Textures are taken from [here](https://www.solarsystemscope.com/textures/)
 
 ## Support
 
